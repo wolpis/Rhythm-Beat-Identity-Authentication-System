@@ -37,8 +37,7 @@ void setup() {
   pinMode(SW, INPUT_PULLUP);
 }
 
-
-void registerBeats() { 
+void registerBeats() {
   Serial.println("\n등록 모드");
 
   digitalWrite(green, HIGH);
@@ -102,7 +101,6 @@ void registerBeats() {
   digitalWrite(green, LOW);
   digitalWrite(rhythm, LOW);
 }
-
 
 void verifyIdentity() {
   Serial.println("\n인증 모드");
@@ -172,7 +170,6 @@ void verifyIdentity() {
   digitalWrite(green, LOW);
   digitalWrite(rhythm, LOW);
 }
-
 
 bool compareBeats(BeatData stored[], BeatData input[]) {
   for (int i = 0; i < 10; i += 2) {  // 홀수번째 줄만 비교
