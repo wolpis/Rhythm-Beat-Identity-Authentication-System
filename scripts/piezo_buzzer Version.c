@@ -102,7 +102,6 @@ void registerBeats() {
 void verifyIdentity() {
   Serial.println("\n인증 모드");
 
-  digitalWrite(green, HIGH);
   digitalWrite(blue, HIGH);
 
   BeatData result[10];
