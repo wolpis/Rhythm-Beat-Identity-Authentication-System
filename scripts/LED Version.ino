@@ -180,13 +180,6 @@ void verifyIdentity() {
 bool compareBeats(BeatData stored[], BeatData input[]) {
   int count = 0;
   for (int i = 0; i < 10; i += 1) {
-    Serial.print("등록 ");
-    Serial.println(input[i].interval);
-    Serial.print("인증 ");
-    Serial.println(stored[i].interval);
-    Serial.print("오차 ");
-    Serial.println(stored[i].interval - input[i].interval);
-    Serial.println("----------------------");
     if (abs(stored[i].interval - input[i].interval) > 0.3) {
       count++;
     }  
