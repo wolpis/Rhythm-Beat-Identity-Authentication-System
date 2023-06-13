@@ -173,16 +173,18 @@ void verifyIdentity() {
 }
 
 bool compareBeats(BeatData stored[], BeatData input[]) {
-  for (int i = 0; i < 10; i += 2) {  // 홀수번째 줄만 비교
+  int count = 0;
+  for (int i = 0; i < 10; i += 1) {
     if (abs(stored[i].interval - input[i].interval) > 0.1) {
-      Serial.println(stored[i].interval);
-      Serial.println(input[i].interval);
-      Serial.println(i);
-      return false;
-    }
+      count++;
+    }  
+  }
+  if (count != 0) {
+    return false;
   }
   return true;
 }
+
 
 
 void loop() {
