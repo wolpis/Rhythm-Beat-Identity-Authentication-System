@@ -48,13 +48,17 @@ void registerBeats() {
   for (int i = 0; i < 10; i++) {
     float interval;
     int rV = digitalRead(push);
+    
+    float start_ = (millis() / 1000.0);
 
     while (rV == LOW) {
       rV = digitalRead(push);
     }
     tone(speakerpin,500,100);
-
-    interval = i > 0 ? (millis() / 1000.0 - result[i - 1].interval) : 0;
+    
+    float end_ = (millis() / 1000.0);
+    
+    interval = i > 0 ? (end_ - start_) : 0;
     result[i].interval = interval;
     Serial.println(interval);
     delay(200);
@@ -109,13 +113,17 @@ void verifyIdentity() {
   for (int i = 0; i < 10; i++) {
     float interval;
     int rV = digitalRead(push);
+    
+    float start_ = (millis() / 1000.0);
 
     while (rV == LOW) {
       rV = digitalRead(push);
     }
     tone(speakerpin,500,100);
-
-    interval = i > 0 ? (millis() / 1000.0 - result[i - 1].interval) : 0;
+    
+    float end_ = (millis() / 1000.0);
+    
+    interval = i > 0 ? (end_ - start_) : 0;
     result[i].interval = interval;
     Serial.println(interval);
     delay(200);
