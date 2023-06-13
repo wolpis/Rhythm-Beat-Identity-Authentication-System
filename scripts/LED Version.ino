@@ -49,15 +49,18 @@ void registerBeats() {
     float interval;
     int rV = digitalRead(push);
 
+    float start_ = (millis() / 1000.0);
+    
     while (rV == LOW) {
       digitalWrite(rhythm, LOW);
       rV = digitalRead(push);
     }
     digitalWrite(rhythm, HIGH);
 
-    interval = i > 0 ? (millis() / 1000.0 - result[i - 1].interval) : 0;
-    result[i].interval = interval;
+    float end_ = (millis() / 1000.0);
+    interval = i > 0 ? (end_ - start_) : 0;
     Serial.println(interval);
+    result[i].interval = interval;
     delay(300);
   }
 
@@ -113,17 +116,21 @@ void verifyIdentity() {
     float interval;
     int rV = digitalRead(push);
 
+    float start_ = (millis() / 1000.00);
+    
     while (rV == LOW) {
       digitalWrite(rhythm, LOW);
       rV = digitalRead(push);
     }
     digitalWrite(rhythm, HIGH);
 
-    interval = i > 0 ? (millis() / 1000.0 - result[i - 1].interval) : 0;
-    result[i].interval = interval;
+    float end_ = (millis() / 1000.00);
+    interval = i > 0 ? (end_ - start_) : 0;
     Serial.println(interval);
+    result[i].interval = interval;
     delay(300);
   }
+
 
   BeatData storedResult[10];
   int lineNumber = 0;
@@ -171,13 +178,21 @@ void verifyIdentity() {
 }
 
 bool compareBeats(BeatData stored[], BeatData input[]) {
-  for (int i = 0; i < 10; i += 2) {  // 홀수번째 줄만 비교
-    if (abs(stored[i].interval - input[i].interval) > 0.5) {
-      Serial.println(stored[i].interval);
-      Serial.println(input[i].interval);
-      Serial.println(i);
-      return false;
-    }
+  int count = 0;
+  for (int i = 0; i < 10; i += 1) {
+    Serial.print("등록 ");
+    Serial.println(input[i].interval);
+    Serial.print("인증 ");
+    Serial.println(stored[i].interval);
+    Serial.print("오차 ");
+    Serial.println(stored[i].interval - input[i].interval);
+    Serial.println("----------------------");
+    if (abs(stored[i].interval - input[i].interval) > 0.3) {
+      count++;
+    }  
+  }
+  if (count != 0) {
+    return false;
   }
   return true;
 }
